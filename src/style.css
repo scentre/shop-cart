@@ -144,6 +144,13 @@ a {
   font-weight: bold;
 }
 
+.fa-plus {
+  color: green;
+}
+.fa-minus {
+  color: red;
+}
+
 /**
 * ! style rules for shopping-cart
 **/

@@ -15,9 +15,39 @@ let generateCartItems = () => {
       .map(({ item, id }) => {
         let search = shopItemsData.find((y) => y.id == id) || [];
 
+        console.log(search);
+
         return `<div class="cart-item">
           
-          <img src=""/>    
+          <img width="100" src="${search.img}" alt=""/>    
+
+          <div class="details">
+          
+          <div class="title-price-x">
+
+          <h4 class="title-price">
+         <p>${search.name}</p>   
+          <p class="cart-item-price">$${search.price}</p> 
+          </h4>
+
+          <i class="fa-solid fa-minus" onclick="removeItem(${id})"></i>
+     
+
+          </div>   
+
+
+
+         <div class="buttons">
+            <i class="fa-solid fa-minus" onclick="decrement(${id})"></i>
+            <div id=${id} class="quantity">  ${item}</div>
+            
+            <i class="fa-solid fa-plus"  onclick="increment(${id})"></i>
+            </div>
+
+            <h3>${item * search.price}</h3>
+          </div>   
+
+        </div>
           
           </div>`;
       })
@@ -39,3 +69,58 @@ let generateCartItems = () => {
   }
 };
 generateCartItems();
+
+const increment = (id) => {
+  let selectedItem = id;
+
+  let search = basket.find((item) => item.id === selectedItem.id);
+  if (!search) {
+    basket.push({
+      id: selectedItem.id,
+      item: 1,
+    });
+  } else {
+    search.item += 1;
+  }
+  console.log(basket);
+
+  generateCartItems();
+  localStorage.setItem("data", JSON.stringify(basket));
+  update(selectedItem.id);
+};
+
+const decrement = (id) => {
+  let selectedItem = id;
+
+  let search = basket.find((item) => item.id === selectedItem.id);
+
+  if (!search) return;
+  if (search.item == 0) return;
+  else {
+    search.item -= 1;
+
+    basket = basket.filter((x) => x.item);
+    update(selectedItem.id);
+    generateCartItems();
+    localStorage.setItem("data", JSON.stringify(basket));
+  }
+};
+
+const update = (id) => {
+  let search = basket.find((x) => x.id === id);
+
+  if (search) {
+    document.getElementById(id).innerHTML = search.item;
+  } else {
+    document.getElementById(id).innerHTML = 0;
+  }
+  calculation();
+};
+
+let removeItem = (id) => {
+  let selectedItem = id;
+
+  basket = basket.filter((x) => x.id !== selectedItem.id);
+  generateCartItems();
+  localStorage.setItem("data", JSON.stringify(basket));
+};
