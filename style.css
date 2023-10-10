@@ -1,0 +1,91 @@
+/**
+* ! Changing default styles of the browser
+**/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+}
+.navbar {
+  background-color: #212529;
+  color: #fff;
+  padding: 25px 60px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+i {
+  cursor: pointer;
+}
+
+.cart {
+  font-size: 20px;
+  padding: 5px;
+  border-radius: 4px;
+  position: relative;
+}
+
+.cartAmount {
+  position: absolute;
+  top: -9px;
+  right: -6px;
+  font-size: 16px;
+  color: #fff;
+  background-color: red;
+  border-radius: 3px;
+  padding: 3px;
+}
+
+.shop {
+  display: grid;
+  grid-template-columns: repeat(4, 223px);
+  gap: 30px;
+  justify-content: center;
+}
+
+@media (max-width: 1000px) {
+  .shop {
+    grid-template-columns: repeat(2, 223px);
+  }
+}
+
+@media (max-width: 500px) {
+  .shop {
+    grid-template-columns: repeat(1, 223px);
+  }
+}
+
+.item {
+  border: 2px solid #212529;
+  border-radius: 4px;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  gap: 10px;
+  .price-quantity {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.buttons {
+  display: flex;
+  gap: 8px;
+  font-size: 16px;
+
+  .fa-plus {
+    color: green;
+  }
+  .fa-minus {
+    color: red;
+  }
+}
