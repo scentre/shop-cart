@@ -115,6 +115,7 @@ const update = (id) => {
     document.getElementById(id).innerHTML = 0;
   }
   calculation();
+  totalAmount();
 };
 
 let removeItem = (id) => {
@@ -122,5 +123,24 @@ let removeItem = (id) => {
 
   basket = basket.filter((x) => x.id !== selectedItem.id);
   generateCartItems();
+  totalAmount();
   localStorage.setItem("data", JSON.stringify(basket));
 };
+
+let totalAmount = () => {
+  if (basket.length !== 0) {
+    let amount = basket
+      .map(({ item, id }) => {
+        let search = shopItemsData.find((y) => y.id === id) || [];
+        return item * search.price;
+      })
+      .reduce((acc, curr) => acc + curr, 0);
+    label.innerHTML = `<h2>Total Bill : $${amount}</h2>
+    
+    <button class="checkout">Checkout</button>
+    <button class="removeAll">Clear Cart</button>
+    
+    `;
+  }
+};
+totalAmount();
